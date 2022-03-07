@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,8 @@ using UnityEngine;
 public class BrickList : MonoBehaviour
 {
     [SerializeField] private List<Brick> bricks;
-
+    public List<Brick> Bricks => bricks;
+    public  static Action OnResult;
     public void RemoveBrick()
     {
         for (int i = 0; i < bricks.Count; i++)
@@ -29,7 +31,7 @@ public class BrickList : MonoBehaviour
             }
             if (bricks.Count == 0)
             {
-                print("ïÎÁÅÄÈË ÊÀÊÎÉ ÒÎ ÈÃÐÎÊ");
+                OnResult?.Invoke();
             }
         }
     }

@@ -54,6 +54,7 @@ public class PowerUp : MonoBehaviour
                 {
                     ViewSecondPlatform();
                 }
+                Destroy(gameObject);
             }
             if (!ai)
             {
@@ -69,6 +70,7 @@ public class PowerUp : MonoBehaviour
                 {
                     ViewSecondPlatform();
                 }
+                Destroy(gameObject);
             }
         }
     }
