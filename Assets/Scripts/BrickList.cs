@@ -8,6 +8,7 @@ public class BrickList : MonoBehaviour
     [SerializeField] private List<Brick> bricks;
     public List<Brick> Bricks => bricks;
     public  static Action OnResult;
+    
     public void RemoveBrick()
     {
         for (int i = 0; i < bricks.Count; i++)
@@ -21,6 +22,7 @@ public class BrickList : MonoBehaviour
 
         IEnumerator CorTryRemoveBrick()
         {
+            Debug.Log("1");
             yield return new WaitForSeconds(1.5f);
             for (int i = 0; i < bricks.Count; i++)
             {
@@ -29,9 +31,11 @@ public class BrickList : MonoBehaviour
                     bricks.RemoveAt(i);
                 }
             }
-            if (bricks.Count == 0)
+            if (bricks.Count <= 0)
             {
-                OnResult?.Invoke();
+                Debug.Log("2");
+                OnResult.Invoke();
+               
             }
         }
     }

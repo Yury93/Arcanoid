@@ -58,10 +58,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bad2a701f2f9a7143b54d13c7d5e2363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ai: 0
   joystick: {fileID: 0}
   speedMovement: 65.13
   rb: {fileID: 3385753980725430958}
+  ai: 0
+  timerState: 0
+  lerpT: 0.01
 --- !u!50 &3385753980725430958
 Rigidbody2D:
   serializedVersion: 4
@@ -109,8 +111,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3385753981279704115}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.77986753, y: 0.12920466, z: 0.57107}
+  m_LocalPosition: {x: 0, y: 0.0465, z: 0}
+  m_LocalScale: {x: 0.77986753, y: 0.6454419, z: 0.57107}
   m_Children: []
   m_Father: {fileID: 3385753980725430944}
   m_RootOrder: 0
@@ -154,9 +156,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.9245283, g: 0.099430345, b: 0.099430345, a: 1}
+  m_SortingOrder: 94
+  m_Sprite: {fileID: 21300000, guid: 07db8046ee519294fae3ad5f695ea174, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -179,16 +181,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0027709752, y: -0.033480942}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.91, y: 0.18}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.87253463, y: 0.10940653}
   m_EdgeRadius: 0

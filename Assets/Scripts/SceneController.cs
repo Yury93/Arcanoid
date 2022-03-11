@@ -3,12 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneController : SingletonBase<SceneController>
+public class SceneController : MonoBehaviour
 {
     [SerializeField] private string nameScene;
 
-    public void NextScene()
+    private GameController d;
+    private void Start()
     {
+        d = FindObjectOfType<GameController>();
+        d.DontDestr();
+        d.EndLevel += Instance_EndLevel;
+    }
+
+    private void Instance_EndLevel()
+    {
+        Debug.Log("6");
         SceneManager.LoadScene(nameScene);
+        
     }
 }

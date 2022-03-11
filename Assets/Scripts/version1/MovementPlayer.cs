@@ -78,7 +78,14 @@ public class MovementPlayer : MonoBehaviour
         else
         {
             ballsController = GameObject.Find("ModelAI");
-            transform.DOMoveX(ballsController.transform.position.x, 1f);
+            if (ballsController)
+            {
+                transform.DOMoveX(ballsController.transform.position.x, 1f);
+            }
+            else
+            {
+                StartCoroutine(CorTimerAiUpdate());
+            }
         }
     }
 }

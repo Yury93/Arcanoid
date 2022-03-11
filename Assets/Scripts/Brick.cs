@@ -10,51 +10,86 @@ public class Brick : MonoBehaviour
     [SerializeField] private TicketIndex ticket;
     [SerializeField] private bool ai,  bonus;
     [SerializeField] private GameObject bonusPrefab;
-    
+    [SerializeField] private bool empty;
+    private EffectManager effector;
+    [SerializeField] private bool indestruct;
+
     public void Start()
     {
-        textIndex = GetComponentInChildren<Text>();
-        if(textIndex)
+        if (!empty)
         {
-            index = ticket.Index;
-            textIndex.text = index.ToString();
+            textIndex = GetComponentInChildren<Text>();
+            if (textIndex)
+            {
+                index = ticket.Index;
+                textIndex.text = index.ToString();
+            }
         }
+        effector = GameObject.Find("EffectManager").GetComponent<EffectManager>();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!bonus)
+        if (!empty)
         {
+            if (!bonus)
+            {
+                if (collision.gameObject.tag == "Ball")
+                {
+                    effector.DestroyBrick(transform.position);
+                    if (!indestruct)
+                    {
+                        Destroy(gameObject, 0.1f);
+                    }
+                    ticket.gameObject.GetComponentInChildren<Text>().color = Color.black;
+                }
+                if (collision.gameObject.CompareTag("Ball") && ai)
+                {
+                    effector.DestroyBrick(transform.position);
+                    if (!indestruct)
+                    {
+                        Destroy(gameObject, 0.1f);
+                    }
+                    ticket.gameObject.GetComponentInChildren<Text>().color = Color.red;
+                }
+            }
+            else if (bonus && collision.gameObject.CompareTag("Ball"))
+            {
+                if (ai)
+                {
+                    var bonus = Instantiate(bonusPrefab, transform.position, Quaternion.identity);
+                    bonus.GetComponent<PowerUp>().SetAiMode(true);
+                    ticket.gameObject.GetComponentInChildren<Text>().color = Color.red;
+                    effector.DestroyBrick(transform.position);
+                    if (!indestruct)
+                    {
+                        Destroy(gameObject, 0.1f);
+                    }
+                }
+                else if (!ai)
+                {
+                    var bonus = Instantiate(bonusPrefab, transform.position, Quaternion.identity);
+                    bonus.GetComponent<PowerUp>().SetAiMode(false);
+                    ticket.gameObject.GetComponentInChildren<Text>().color = Color.black;
+                    effector.DestroyBrick(transform.position);
+                    if (!indestruct)
+                    {
+                        Destroy(gameObject, 0.1f);
+                    }
+                }
+            }
             if (collision.gameObject.tag == "Ball")
             {
-                Destroy(gameObject);
-                ticket.gameObject.GetComponentInChildren<Text>().color = Color.black;
-            }
-            if (collision.gameObject.CompareTag("Ball") && ai)
-            {
-                Destroy(gameObject);
-                ticket.gameObject.GetComponentInChildren<Text>().color = Color.red;
+                if (gameObject.GetComponentInParent<BrickList>())
+                    gameObject.GetComponentInParent<BrickList>().RemoveBrick();
             }
         }
-        else if(bonus && collision.gameObject.CompareTag("Ball"))
+        else
         {
-            if (ai)
+            effector.DestroyBrick(transform.position);
+            if (!indestruct)
             {
-               var bonus = Instantiate(bonusPrefab, transform.position, Quaternion.identity);
-                bonus.GetComponent<PowerUp>().SetAiMode(true);
-                ticket.gameObject.GetComponentInChildren<Text>().color = Color.red;
-                Destroy(gameObject);
+                Destroy(gameObject, 0.1f);
             }
-            else if(!ai)
-            {
-                var bonus = Instantiate(bonusPrefab, transform.position, Quaternion.identity);
-                bonus.GetComponent<PowerUp>().SetAiMode(false);
-                ticket.gameObject.GetComponentInChildren<Text>().color = Color.black;
-                Destroy(gameObject);
-            }
-        }
-        if (collision.gameObject.tag == "Ball")
-        {
-            gameObject.GetComponentInParent<BrickList>().RemoveBrick();
         }
     }
 }

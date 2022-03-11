@@ -26,5 +26,9 @@ public abstract class SingletonBase<T> : MonoBehaviour where T : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-
+    public void DontDestr()
+    {
+        DontDestroyOnLoad(gameObject);
+        m_DoNotDestroyOnLoad = true;
+    }
 }

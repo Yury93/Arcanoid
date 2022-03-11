@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ball
   - Ticket
+  - Wall
   layers:
   - Default
   - TransparentFX

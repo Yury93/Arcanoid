@@ -32,6 +32,7 @@ public class BallsController : MonoBehaviour
         if (!ai)
         {
             rbBalls.velocity = new Vector2(Random.Range(-direction, direction), Random.Range(minSpeed, maxSpeed));
+
         }
         if(ai)
         {
